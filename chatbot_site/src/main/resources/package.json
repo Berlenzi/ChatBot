@@ -1,0 +1,16 @@
+{
+  "config": {
+    "imgsPath": "",
+    "domainServer": "chatbot-core-staging.citelgroup.it/chatbot",
+    "domainPort": "",
+    "username": "Customer",
+    "defaultLanguage": "Italian",
+    "botName": "StageBot",
+    "botId": "45a194de-b8c8-40b4-8695-0b1178448e73",
+    "startImage": "",
+    "ssl": false,
+    "guestUsername": "guest",
+    "guestPassword": "W3bChatGu35t!"
+  }
+
+}
