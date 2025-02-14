@@ -93,3 +93,96 @@ Cambiare password o username di un utente, con chiamate PUT
 /api/users/{userId}/change-password e PUT
 /api/users/{userId}/change-username nel controller.
 Se l’utente non viene trovato viene lanciato un eccezione UserNotFoundExceptio
+
+ENGLISH VERSION 
+
+Project Overview
+
+The developed application allows user registration, authentication management via JWT (Json Web Token), and provides an integrated chat with a remote Bot. The backend is developed with Java and Spring Boot, while the frontend uses React, with REST calls to server endpoints.
+
+Main Purpose:
+
+Authentication: Users can register or log in using a username or email.
+
+State Management: On every login or logout, the system sets the user as “ONLINE” or “OFFLINE”.
+
+Chat: Once authenticated, users can start a conversation with a ChatBot. Messages and chat histories are stored in a database.
+
+User Management: A section is available for changing passwords, usernames, and viewing the status of all users.
+
+Technologies Used:
+
+Spring Boot
+
+Spring Web: For REST controllers (exposed under /api/...).
+
+Spring Security + JWT: For stateless authentication. The server does not maintain sessions but uses tokens sent by the client.
+
+Spring Data JPA (Hibernate): Manages entities and communication with the relational database.
+
+React
+
+Manages the frontend with React Router for navigation (/login, /register, /chat, etc.).
+
+Context API: Maintains authentication state and JWT tokens.
+
+Fetch API: Makes server requests, sending JWT tokens in the Authorization headers.
+
+Tailwind CSS and Material UI: For styling and UI components.
+
+CryptoJS: Encrypts JWT tokens stored in localStorage for enhanced client-side security.
+
+Database
+
+PostgreSQL database with entities MyAppUser, MyAppChat, and Message managed via Spring Data repositories.
+
+Authentication Flow:
+
+Registration
+
+Endpoint: POST /api/register.
+
+Client-submitted data (username, email, password) is saved as a new MyAppUser instance. Passwords are encrypted with BCrypt before being stored.
+
+Login
+
+Endpoint: POST /api/login.
+
+Valid credentials generate a JWT (via JwtUtils) with a configured expiration, returned to the client. The server sets the user status to ONLINE.
+
+Route Protection
+
+The frontend’s PrivateRoute component checks for a valid JWT token (decrypted with CryptoJS). If absent, redirects to login.
+
+Backend JwtAuthFilter intercepts protected requests, extracts the token from the “Authorization: Bearer” header, verifies it, and sets the authentication object in Spring Security.
+
+Logout
+
+Endpoint: POST /api/logout.
+
+Sets user status to OFFLINE, and the frontend removes the stored token, resetting the authentication state.
+
+Chat Functionality:
+
+Start Chat (/api/chat)
+
+HomePage sends POST /api/chat with JWT token. The backend uses ChatProvider to call a remote service to start a conversation with the Bot. Initial messages (e.g., Bot welcome message) are saved in the database under MyAppChat.
+
+Send and Receive Messages (/api/send)
+
+Users send messages via POST /api/send with {message, idConversation, sender, token}. The backend saves messages in the Message entity, forwards the text to the Bot, and saves the Bot’s response as senderType = BOT under the same MyAppChat.
+
+Chat History (/api/history)
+
+Sidebar calls POST /api/history to get a list of ConversationDTOs with exchanged messages for each conversation, allowing users to revisit and continue previous chats.
+
+User and State Management:
+
+Users Page (Frontend)
+
+Displays all users with ONLINE/OFFLINE status.
+
+Allows changing user passwords or usernames via PUT /api/users/{userId}/change-password and PUT /api/users/{userId}/change-username endpoints.
+
+Throws UserNotFoundException if the user is not found.
+
