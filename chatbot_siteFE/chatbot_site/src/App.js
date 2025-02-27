@@ -5,7 +5,6 @@ import RegisterPage from './pages/register';
 import HomePage from './pages/Home.js';
 import Users from './pages/users';
 import PrivateRoute from './Components/PrivateRoute';
-import OperatorChat from './pages/OperatorChat.js';
 
 function App() {
   return (
@@ -33,14 +32,7 @@ function App() {
               </PrivateRoute>
             }
           /> 
-          <Route
-            path="/operator"
-            element={
-              <PrivateRoute>
-                <OperatorChat />
-              </PrivateRoute>
-            }
-          /> 
+  
          
        
 

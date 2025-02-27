@@ -111,7 +111,7 @@ public class ChatController {
             ChatBM chatBM = new ChatBM(idConversation, message, null, null , chatProperties);
             Chat chat = chatProvider.chat(chatBM);
 
-            ChatMessage botResponse = chat.getChatMessages().getFirst();
+            ChatMessage botResponse = chat.getChatMessages().get(0);
 
 
             chatService.addMessageToChat(chatId , request.getMessage() , sender , idConversation);

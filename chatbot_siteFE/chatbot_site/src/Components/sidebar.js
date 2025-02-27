@@ -188,28 +188,7 @@ function Sidebar({isOperator , isOpen, toggleSidebar, setMessages, token, onConv
             </button>
           </div>
         )}
-         {isOpen ? (
-          <div className="mb-2">
-            <button
-              onClick={() => navigate(isOperator ? '/chat' : '/operator')}
-              className="bg-accent hover:bg-hover w-full p-4 rounded flex items-center justify-center gap-x-3 font-poppins"
-            >
-              
-              {isOperator ? 'Chat Bot' : 'Chat Operatore'}
-              
-              <ChatSvg className="w-5 h-5" />
-            </button>
-          </div>
-        ) : (
-          <div className="mb-2 flex justify-center hover:bg-hover rounded">
-            <button
-              onClick={() => navigate(isOperator ? '/chat' : '/operator')}
-              className="hover:bg-hover rounded p-2"
-            >
-              <ChatSvg className="w-5 h-5" />
-            </button>
-          </div>
-        )}
+        
 
         <div className="mt-2">
           <Logout isOpen={isOpen} />

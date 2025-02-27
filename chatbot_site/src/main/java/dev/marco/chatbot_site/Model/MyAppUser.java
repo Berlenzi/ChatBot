@@ -74,9 +74,7 @@ public class MyAppUser  implements UserDetails {
         this.status = userStatus;
     }
 
-    public int getId() {
-        return id;
-    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
